@@ -1,7 +1,6 @@
-import faiss
-import numpy as np
-
 from sentence_transformers import SentenceTransformer
+import numpy as np
+import faiss
 
 model=SentenceTransformer("all-MiniLM-L6-v2")
 
@@ -18,7 +17,8 @@ index.add(doc_embeddings)
 
 query="I Want to cancel my food order"
 
-q_emb=model.encode([query]).astype('float32')
+q_emb=model.encode([query]).astype("float32")
 distances,indices=index.search(q_emb, k=2)
+
 for i,idx in enumerate(indices[0]):
     print(f"Result {i+1}: {docs[idx]} (score: {distances[0][i]:.2f})")
